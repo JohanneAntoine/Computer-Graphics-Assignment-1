@@ -28,7 +28,7 @@ public:
 		for (int j = 0; j < m_segmentsY; j++) {
 			float lat1 = j * yOffset;
 			float lat2 = (j+1) * yOffset;
-			printf("%f \n", yOffset);
+			//printf("%f \n", yOffset);
 			for (int i = 0; i < m_segmentsX; i++) {
 				// set the angles
 				float angle1 = i * angleToRotate;
@@ -81,6 +81,48 @@ public:
 	};
 
 	void drawNormal() {
+		float angleToRotate = 2 * PI / m_segmentsX;
+		float normalLineLength = 0.5f;
+		float yOffset = 1.0/m_segmentsY;
+
+		glColor3f(0.0f, 1.0f, 0.0f);
+
+		glBegin(GL_LINES);
+
+		for (int i = 0; i < m_segmentsX; i++) {
+			float angle1 = i * angleToRotate;
+			float angle2 = (i + 1) * angleToRotate;
+
+			glVertex3f(0.0f, -0.5f, 0.0f);
+			glVertex3f(0.0f, -0.5f - normalLineLength, 0.0f);
+
+			glVertex3f(0.5f * cos(angle1), -0.5f, 0.5f * sin(angle1));
+			glVertex3f(0.5f * cos(angle1), -0.5f - normalLineLength, 0.5f * sin(angle1));
+
+			glVertex3f(0.5f * cos(angle2), -0.5f, 0.5f * sin(angle2));
+			glVertex3f(0.5f * cos(angle2), -0.5f - normalLineLength, 0.5f * sin(angle2));
+
+		}
+
+		for (int i = 0; i < m_segmentsY; i++) {
+			float lat1 = i * yOffset;
+			float lat2 = (i+1) * yOffset;
+			for (int j = 0; j < m_segmentsX; j++)
+			{
+				float angle1 = j * angleToRotate;
+				float angle2 = (j+1) * angleToRotate;
+
+				float xCo = 0.5f * cos(angle1) * (1-lat1);
+				float yCo = -0.5f + lat1;
+				float zCo = 0.5f * sin(angle1) * (1-lat1);
+				glVertex3f(xCo, yCo, zCo);
+				glVertex3f(cos(angle1)/8 + xCo, yCo+(1.0/16.0), zCo + sin(angle1)/8);
+
+			}
+			
+		}
+
+		glEnd();
 
 	};
 
