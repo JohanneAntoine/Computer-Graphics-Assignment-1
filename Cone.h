@@ -18,14 +18,83 @@ public:
 	}
 
 	void draw() {
+		// bottom
 		float angleToRotate = 2 * M_PI / m_segmentsX;
+		draw_base(angleToRotate);
+
+		float yOffset = 1.0/m_segmentsY;
+
+		glBegin(GL_TRIANGLES);
+		for (int j = 0; j < m_segmentsY; j++) {
+			float lat1 = j * yOffset;
+			float lat2 = (j+1) * yOffset;
+			printf("%f \n", yOffset);
+			for (int i = 0; i < m_segmentsX; i++) {
+				// set the angles
+				float angle1 = i * angleToRotate;
+				float angle2 = (i+1) * angleToRotate;
+				// first normal
+				glNormal3f(cos(angle1), 0.5f, sin(angle1));
+				//vertex along height
+				glVertex3f(0.5f * cos(angle1) * (1-lat1), -0.5f + lat1, 0.5f * sin(angle1) * (1-lat1));
+				glVertex3f(0.5f * cos(angle1) * (1-lat2), -0.5f + lat2, 0.5f * sin(angle1) * (1-lat2));
+				glNormal3f(cos(angle2), 0.5f, sin(angle2));
+				//third vertex
+				glVertex3f(0.5f * cos(angle2) * (1-lat1), -0.5f + lat1, 0.5f * sin(angle2) * (1-lat1));
+
+				// 2nd triangle
+				//reset normal
+				glNormal3f(cos(angle2), 0.5f, sin(angle2));
+				glVertex3f(0.5f * cos(angle2)* (1-lat1), -0.5f + lat1, 0.5f * sin(angle2) * (1-lat1));
+				glNormal3f(cos(angle1), 0.5f, sin(angle1));
+				glVertex3f(0.5f * cos(angle1) * (1-lat2), -0.5f + lat2, 0.5f * sin(angle1) * (1-lat2));
+				glNormal3f(cos(angle2), 0.5f, sin(angle2));
+				glVertex3f(0.5f * cos(angle2) * (1-lat2), -0.5f + lat2, 0.5f * sin(angle2) * (1-lat2));
+
+			}
+
+
+		}
+		
+		// glNormal3f(1.0f, 0.5f, 0.0f);
+
+		// glVertex3f(0.5f, -0.5f, 0.0f);
+		// glVertex3f(0.5f * 0.75, -0.25f, 0.0);
+
+		// glNormal3f(cos(angleToRotate), 0.5f, sin(angleToRotate));
+
+		// glVertex3f(0.5f * cos(angleToRotate), -0.5f, 0.5f * sin(angleToRotate));
+
+		// // second half
+		// glNormal3f(cos(angleToRotate), 0.5f, sin(angleToRotate));
+		// glVertex3f(0.5f * cos(angleToRotate), -0.5f, 0.5f * sin(angleToRotate));
+		// glNormal3f(1.0f, 0.5f, 0.0f);
+		// glVertex3f(0.5f * 0.75, -0.25f, 0.0);
+		// glNormal3f(cos(angleToRotate), 0.5f, sin(angleToRotate));
+		// glVertex3f(0.5f * cos(angleToRotate) * 0.75, -0.25f, 0.5f * sin(angleToRotate) * 0.75);
+		
+
+		
+		
+		glEnd();
+		
+	};
+
+	void drawNormal() {
+
+	};
+
+private:
+	void draw_base(float angle) {
+
+
 
 		glBegin(GL_TRIANGLES);
 
 		for (int i = 0; i < m_segmentsX; i++) {
 
-            float angle1 = i * angleToRotate;
-            float angle2 = (i + 1) * angleToRotate;
+            float angle1 = i * angle;
+            float angle2 = (i + 1) * angle;
 
             glNormal3f(0.0f, -1.0f, 0.0f);
             glVertex3f(0.0f, -0.5f, 0.0f);
@@ -44,13 +113,8 @@ public:
 		}
 
 		glEnd();
-	};
 
-	void drawNormal() {
-
-	};
-
-private:
+	}
 };
 
 #endif
