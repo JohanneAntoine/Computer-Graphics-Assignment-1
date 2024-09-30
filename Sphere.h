@@ -31,25 +31,15 @@ public:
                 float phi2 = (j + 1) * angleLatitude;
 
 				// triangle 1
+				draw_side(0.5 * (sin(phi2) * cos(theta1)), 0.5 * (cos(phi2)), 0.5 * (sin(phi2) * sin(theta1)));
+				draw_side((0.5*sin(phi1) * cos(theta1)), 0.5f * (cos(phi1)), 0.5f * (sin(phi1) * sin(theta1)));
+				draw_side(0.5 * (sin(phi1) * cos(theta2)), 0.5 * (cos(phi1)), 0.5 * (sin(phi1) * sin(theta2)));
 				
-				glNormal3f(0.5 * (sin(phi1) * cos(theta1)), 0.5 * (cos(phi1)), 0.5 * (sin(phi1) * sin(theta1)));
-				glVertex3f(0.5 * (sin(phi1) * cos(theta1)), 0.5 * (cos(phi1)), 0.5 * (sin(phi1) * sin(theta1)));
-
-				glNormal3f(0.5 * (sin(phi1) * cos(theta2)), 0.5 * (cos(phi1)), 0.5 * (sin(phi1) * sin(theta2)));
-				glVertex3f(0.5 * (sin(phi1) * cos(theta2)), 0.5 * (cos(phi1)), 0.5 * (sin(phi1) * sin(theta2)));
-
-				glNormal3f(0.5 * (sin(phi2) * cos(theta1)), 0.5 * (cos(phi2)), 0.5 * (sin(phi2) * sin(theta1)));
-				glVertex3f(0.5 * (sin(phi2) * cos(theta1)), 0.5 * (cos(phi2)), 0.5 * (sin(phi2) * sin(theta1)));
 
 			
-				glNormal3f(0.5 * (sin(phi2) * cos(theta1)), 0.5 * (cos(phi2)), 0.5 * (sin(phi2) * sin(theta1)));
-				glVertex3f(0.5 * (sin(phi2) * cos(theta1)), 0.5 * (cos(phi2)), 0.5 * (sin(phi2) * sin(theta1)));
-
-				glNormal3f(0.5 * (sin(phi1) * cos(theta2)), 0.5 * (cos(phi1)), 0.5 * (sin(phi1) * sin(theta2)));
-				glVertex3f(0.5 * (sin(phi1) * cos(theta2)), 0.5 * (cos(phi1)), 0.5 * (sin(phi1) * sin(theta2)));
-
-				glNormal3f(0.5 * (sin(phi2) * cos(theta2)), 0.5 * (cos(phi2)), 0.5 * (sin(phi2) * sin(theta2)));
-				glVertex3f(0.5 * (sin(phi2) * cos(theta2)), 0.5 * (cos(phi2)), 0.5 * (sin(phi2) * sin(theta2)));
+				draw_side(0.5 * (sin(phi2) * cos(theta1)), 0.5 * (cos(phi2)), 0.5 * (sin(phi2) * sin(theta1)));
+				draw_side(0.5 * (sin(phi1) * cos(theta2)), 0.5 * (cos(phi1)), 0.5 * (sin(phi1) * sin(theta2)));
+				draw_side(0.5 * (sin(phi2) * cos(theta2)), 0.5 * (cos(phi2)), 0.5 * (sin(phi2) * sin(theta2)));
 
 			}
 		}
@@ -86,6 +76,12 @@ public:
 	};
 
 private:
+	void draw_side(float x, float y, float z) {
+		glm::vec3 vector(x,y,z);
+		glm::vec3 normal = glm::normalize(vector);
+		glNormal3f(normal.x, normal.y, normal.z);
+		glVertex3f(x,y,z);
+	}
 };
 
 #endif
