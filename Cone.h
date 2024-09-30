@@ -85,10 +85,10 @@ public:
 		float normalLineLength = 0.5f;
 		float yOffset = 1.0/m_segmentsY;
 
-		glColor3f(0.0f, 1.0f, 0.0f);
+		glColor3f(1.0f, 0.0f, 0.0f);
 
 		glBegin(GL_LINES);
-
+		// bottom base
 		for (int i = 0; i < m_segmentsX; i++) {
 			float angle1 = i * angleToRotate;
 			float angle2 = (i + 1) * angleToRotate;
@@ -110,7 +110,6 @@ public:
 			for (int j = 0; j < m_segmentsX; j++)
 			{
 				float angle1 = j * angleToRotate;
-				float angle2 = (j+1) * angleToRotate;
 
 				float xCo = 0.5f * cos(angle1) * (1-lat1);
 				float yCo = -0.5f + lat1;

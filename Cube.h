@@ -77,7 +77,16 @@ private:
 				float w1 = -0.5f + (j + 1) * stepY;
 
 				// right or left
-				if (normalX == 1.0f || normalX == -1.0f) {
+				if (normalX == -1.0f) {
+					glVertex3f(fixedCoordinate, w0, v1);
+					glVertex3f(fixedCoordinate, w1, v1);
+					glVertex3f(fixedCoordinate, w1, v0);
+
+					glVertex3f(fixedCoordinate, w0, v1);
+					glVertex3f(fixedCoordinate, w1, v0);
+					glVertex3f(fixedCoordinate, w0, v0);
+				}
+				else if (normalX == 1.0f) {
 					glVertex3f(fixedCoordinate, w0, v0);
 					glVertex3f(fixedCoordinate, w1, v0);
 					glVertex3f(fixedCoordinate, w1, v1);
@@ -88,7 +97,16 @@ private:
 				}
 
 				// top or bottom
-				else if (normalY == 1.0f || normalY == -1.0f) {
+				if (normalY == 1.0f) {
+					glVertex3f(v1, fixedCoordinate, w0);
+					glVertex3f(v0, fixedCoordinate, w0);
+					glVertex3f(v0, fixedCoordinate, w1);
+
+					glVertex3f(v1, fixedCoordinate, w0);
+					glVertex3f(v0, fixedCoordinate, w1);
+					glVertex3f(v1, fixedCoordinate, w1);
+				}
+				else if (normalY == -1.0f) {
 					glVertex3f(v0, fixedCoordinate, w0);
 					glVertex3f(v1, fixedCoordinate, w0);
 					glVertex3f(v1, fixedCoordinate, w1);
@@ -99,7 +117,16 @@ private:
 				}
 
 				// front or back
-				else if (normalZ == 1.0f || normalZ == -1.0f) {
+				if (normalZ == -1.0f) {
+					glVertex3f(v1, w0, fixedCoordinate);
+					glVertex3f(v0, w0, fixedCoordinate);
+					glVertex3f(v0, w1, fixedCoordinate);
+
+					glVertex3f(v1, w0, fixedCoordinate);
+					glVertex3f(v0, w1, fixedCoordinate);
+					glVertex3f(v1, w1, fixedCoordinate);
+				}
+				else if (normalZ == 1.0f) {
 					glVertex3f(v0, w0, fixedCoordinate);
 					glVertex3f(v1, w0, fixedCoordinate);
 					glVertex3f(v1, w1, fixedCoordinate);

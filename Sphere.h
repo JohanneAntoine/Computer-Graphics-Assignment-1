@@ -36,10 +36,10 @@ public:
 				draw_side(0.5 * (sin(phi1) * cos(theta2)), 0.5 * (cos(phi1)), 0.5 * (sin(phi1) * sin(theta2)));
 				
 
-			
+				draw_side(0.5 * (sin(phi2) * cos(theta2)), 0.5 * (cos(phi2)), 0.5 * (sin(phi2) * sin(theta2)));
 				draw_side(0.5 * (sin(phi2) * cos(theta1)), 0.5 * (cos(phi2)), 0.5 * (sin(phi2) * sin(theta1)));
 				draw_side(0.5 * (sin(phi1) * cos(theta2)), 0.5 * (cos(phi1)), 0.5 * (sin(phi1) * sin(theta2)));
-				draw_side(0.5 * (sin(phi2) * cos(theta2)), 0.5 * (cos(phi2)), 0.5 * (sin(phi2) * sin(theta2)));
+				
 
 			}
 		}
@@ -59,6 +59,9 @@ public:
                 float theta2 = (i + 1) * angleLongitude;
                 float phi1 = j * angleLatitude;
                 float phi2 = (j + 1) * angleLatitude;
+
+				glm::vec3 vector(0.5 * (sin(phi1) * cos(theta1)), 0.5 * (cos(phi1)), 0.5 * (sin(phi1) * sin(theta1)));
+				glm::vec3 normal = glm::normalize(vector);
 				
 				glVertex3f(0.5 * (sin(phi1) * cos(theta1)), 0.5 * (cos(phi1)), 0.5 * (sin(phi1) * sin(theta1)));
 				glVertex3f(0.6 * (sin(phi1) * cos(theta1)), 0.6 * (cos(phi1)), 0.6 * (sin(phi1) * sin(theta1)));
